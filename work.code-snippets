@@ -1,0 +1,628 @@
+{
+	// v1.0
+	// 引入方法：在 VSCODE 中点击设置-用户代码片段-新建全局代码片段文件，将本页所有内容复制进去
+	// 使用方法：在页面中键入代码片段对应的 prefix，选择后用 tab 键依次切换占位符
+	// 语法介绍：https://juejin.cn/post/6844904052950564871
+	// 代码转换工具：https://snippet-generator.app/
+	// cheatsheet：https://github.com/ManyMeanings/bi-snippet-cheatsheet
+	
+	// ------------------- GLOBAL BEGIN -------------------
+	"打印到控制台": {
+		"scope": "javascript,typescript",
+		"prefix": "log",
+		"body": [
+			"console.log('$1',$2);",
+			"$3"
+		],
+		"description": "Log output to console"
+	},
+	"基本类型选择": {
+		"scope": "javascript",
+		"prefix": "lx",
+		"body": [
+			"${1|boolean,object,array,string,number,function|}"
+		],
+		"description": "类型选择，配合函数注释插件 koroFileHeader 使用"
+	},
+	// ------------------- GLOBAL END -------------------
+
+	// ------------------- BI BEGIN -------------------
+	// ------------------- html begin -------------------
+	"按钮": {
+		"prefix": "btn",
+		"scope": "html",
+		"body": [
+			"<button type=\"button\" class=\"bi-btn ${1|bi-btn-primary,bi-btn-default|}\" @click=\"$3\">$2</button>"
+		],
+		"description": "按钮"
+	},
+	"文本输入框": {
+		"prefix": "input",
+		"scope": "html",
+		"body": [
+		  "<input v-model=\"$1\" type=\"text\" class=\"bi-input\" maxlength=\"50\" placeholder=\"请输入...\" onblur=\"util.validateValue(this)\"/>"
+		],
+		"description": "文本输入框"
+	},
+	"数字输入框": {
+		"prefix": "input",
+		"scope": "html",
+		"body": [
+		  "<bi-input v-model=\"$1\" :int=\"true\" :min=\"0\" :show-btn=\"false\"></bi-input>"
+		],
+		"description": "其他可选 props: max, unit, maxlength, placeholder, ..."
+	},
+	"下拉选择框": {
+		"prefix": "select",
+		"scope": "html",
+		"body": [
+			"<bi-select v-model=\"$1\" :options=\"dict['$2']\" custom-key=\"paramName\" custom-value=\"paramCode\"></bi-select>"
+		],
+		"description": "其他可选 props: is-multiple, disabled, placeholder, with, select-width, max-selected, disable-search, allow-delete"
+	},
+	"单选框": {
+		"prefix": "radio",
+		"scope": "html",
+		"body": [
+			"<bi-radio v-model=\"$1\" :options=\"dict['$2']\" custom-key=\"paramName\" custom-value=\"paramCode\" class=\"bi-button-radios be-inline-block\"></bi-radio>"
+		],
+		"description": "其他可选 props: is-show-title"
+	},
+	"复选框": {
+		"prefix": "checkbox",
+		"scope": "html",
+		"body": [
+			"<bi-check-box v-model=\"$1\" :options=\"dict['$2']\" custom-key=\"paramName\" custom-value=\"paramCode\"></bi-check-box>"
+		],
+		"description": "其他可选 props: is-show-title, show-custom-value"
+	},
+	"文本域": {
+		"prefix": "textarea",
+		"scope": "html",
+		"body": [
+			"<bi-textarea v-model=\"$1\" maxlength=\"500\" placeholder=\"请输入\"></bi-textarea>"
+		],
+		"description": "其他可选 props: disabled, show-count, count-position"
+	},
+	"开关按钮": {
+		"prefix": "switch",
+		"scope": "html",
+		"body": [
+		  "<bi-switch v-model=\"$1\" text=\"ON|OFF\"></bi-switch>"
+		],
+		"description": "其他可选 props: disabled, switch-name"
+	},
+	"日期选择器": {
+		"prefix": "date",
+		"scope": "html",
+		"body": [
+		  "<date-picker v-model=\"$1\" :max=\"'now'\" :min=\"'now'\"></date-picker>"
+		],
+		"description": "其他可选 props: disabled, range, format, type, hideClear, hideClearAndNow"
+	},
+	"文件上传控件": {
+		"prefix": "uploader",
+		"scope": "html",
+		"body": [
+			"<bi-uploader",
+			"    ref=\"uploader\"",
+			"    :auto=\"true\"",
+			"    :url=\"uploadUrl\"",
+			"    :accept=\"accept\"",
+			"    :multiple=\"true\"",
+			"    :file-size-limit=\"1048576\"",
+			"    :file-num-limit=\"'3'\"",
+			"    :form-data=\"formData\"",
+			"    @beforefilequeued=\"filesQueued\"",
+			"    @uploadsuccess=\"uploadComplete\"",
+			"    class=\"btn-uploader\"",
+			">",
+			"    <div slot=\"handler\">选择文件</div>",
+			"</bi-uploader>",
+			""
+		],
+		"description": "实现参考：bi-front-web/pages/market/market-point.html 参考文档：https://fex.baidu.com/webuploader/doc/index.html#WebUploader_Uploader_options"
+	},
+	"表单项骨架": {
+		"scope": "html",
+		"prefix": "bdx",
+		"body": [
+			"<div class=\"biui-form-item ${1|inline,block|}\">",
+			"    <label class=\"biui-form-label\">$2</label>",
+			"    <div class=\"biui-form-value\">$3</div>",
+			"</div>",
+		],
+		"description": "表单项骨架"
+	},
+	"html文件骨架": {
+		"prefix": "html",
+		"scope": "html",
+		"body": [
+			"<!DOCTYPE html>",
+			"<html>",
+			"    <head>",
+			"        <meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\" />",
+			"        <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\" />",
+			"        <meta name=\"apple-mobile-web-app-capable\" content=\"yes\" />",
+			"        <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black\" />",
+			"        <meta name=\"description\" content=\"\" />",
+			"        <meta name=\"keywords\" content=\"\" />",
+			"        <title>$1</title>",
+			"        <script src=\"../../js/include-static.js\"></script>",
+			"        <script>",
+			"            $.bi.loadFile(['/ui/js/easyui/themes/default/easyui.css', '/ui/js/easyui/themes/custom/css/style.css', '/css/order.css']); // 公共样式",
+			"            $.bi.loadFile(['/ui/js/easyui/jquery.easyui.min.js', '/ui/js/easyui/datagrid-detailview.js', '/ui/js/easyui/xlsx.full.min.js']);",
+			"            $.bi.loadFile(['/ui/js/webuploader/webuploader.css', '/ui/js/webuploader/webuploader.min.js']); // 上传文件相关依赖",
+			"            $.bi.loadFile(['/ui/js/echarts.min.js', '/js/pages/common-echarts.js']); // echarts 相关依赖",
+			"        </script>",
+			"        <style></style>",
+			"    </head>",
+			"",
+			"    <body class=\"bi-page-body\">",
+			"        <div id=\"app\" v-clock>",
+			"            <div class=\"bi-panel bi-panel-padding\">",
+			"                <!-- 区块头",
+			"                <div class=\"bi-panel-title\">",
+			"                    标题",
+			"                    <div class=\"bi-panel-title-action\">",
+			"                        <span class=\"bi-font-14 pd-lr-20 bi-color-primary bi-link\" @click=\"\">更多</span>",
+			"                    </div>",
+			"                </div> -->",
+			"                <div class=\"bi-panel-content\">",
+			"                    <!-- 这里开始写页面代码 -->",
+			"                    ",
+			"                    <!-- 弹窗页的底部按钮",
+			"                    <div class=\"action-btns-btn\">",
+			"                        <button type=\"button\" @click=\"$.bi.closePage()\" class=\"bi-btn bi-btn-default\">取消</button>",
+			"                        <button type=\"button\" @click=\"\" class=\"bi-btn bi-btn-primary\">确定</button>",
+			"                    </div> -->",
+			"                </div>",
+			"            </div>",
+			"        </div>",
+			"",
+			"        <script type=\"text/javascript\">",
+			"            $.bi.loadFile('$2'); // js文件路径，如 /js/pages/xxx/xxx.js",
+			"        </script>",
+			"    </body>",
+			"</html>",
+			""
+		],
+		"description": "html文件骨架"
+	},
+	// ------------------- html end -------------------
+	// ------------------- js begin -------------------
+	"获取URL参数": {
+		"prefix": "url",
+		"body": [
+			"util.getQueryString('$1')"
+		],
+		"description": "获取URL参数"
+	},
+	"获取弹窗页面传入的参数": {
+		"prefix": "url",
+		"body": [
+			"var pageArgs = $.bi.getOpenPageParams();"
+		],
+		"description": "获取弹窗页面传入的参数"
+	},
+	"数字格式化": {
+		"prefix": "format",
+		"body": [
+			"util.formatNumber($1, $2, false, '-')"
+		],
+		"description": "4个参数依次为数字，小数位，是否格式化为千分位，若为空返回的结果"
+	},
+	"日期格式化": {
+		"prefix": "format",
+		"body": [
+			"util.formatDate($1, 'yyyy-MM-dd hh:mm:ss')"
+		],
+		"description": "将 $1 格式化成第二个参数的形式"
+	},
+	"百分比格式化": {
+		"prefix": "format",
+		"body": [
+			"formatReturnRate($1)"
+		],
+		"description": "将 $1 * 100 并带上 % ，如果没有数据返回 --"
+	},
+	"判断是否为空": {
+		"prefix": "is_empty",
+		"body": [
+			"$.bi.isEmpty($1)"
+		],
+		"description": "为空返回 true"
+	},
+	"调用弹窗页面内的方法": {
+		"prefix": "page",
+		"body": [
+			"$.bi.callframeMethod(dom, $1)"
+		],
+		"description": "$1 为方法名"
+	},
+	"调用父页面的方法": {
+		"prefix": "page",
+		"body": [
+			"$.bi.callParentMethod($1, $2)"
+		],
+		"description": "$1 为方法名，$2 为参数"
+	},
+	"下载文件": {
+		"prefix": "down",
+		"body": [
+			"$.bi.downloadFile($1, $2)"
+		],
+		"description": "$1 为文件 id，$2 为 url 可选"
+	},
+	"获取字典中对应的名称": {
+		"prefix": "dict",
+		"body": [
+			"$.bi.dictFilter($1, $2, 'paramCode', 'paramName')"
+		],
+		"description": "根据 paramCode 获取对应的 paramName，$1 为 paramCode，$2 通常为接口返回的字典"
+	},
+	"获取系统参数": {
+		"prefix": "sys",
+		"body": [
+			"$.bi.getSP('$1','$2')"
+		],
+		"description": "获取系统参数，$1 为模块名，$2 为参数名"
+	},
+	"合并对象": {
+		"prefix": "extend",
+		"body": [
+			"$.extend(true, $1, $2)"
+		],
+		"description": "将 $2 等多个对象合并到 $1 中, 返回 $1，第一个参数表示是否深度合并"
+	},
+	"加": {
+		"prefix": "add",
+		"body": [
+			"accAdd($1, $2)"
+		],
+		"description": "返回 ($1 + $2) 的结果，解决精度丢失问题"
+	},
+	"减": {
+		"prefix": "sub",
+		"body": [
+			"accSub($1, $2)"
+		],
+		"description": "返回 ($1 - $2) 的结果，解决精度丢失问题"
+	},
+	"乘": {
+		"prefix": "mul",
+		"body": [
+			"accMul($1, $2)"
+		],
+		"description": "返回 ($1 * $2) 的结果，解决精度丢失问题"
+	},
+	"除": {
+		"prefix": "div",
+		"body": [
+			"accDiv($1, $2)"
+		],
+		"description": "返回 ($1 / $2) 的结果，解决精度丢失问题"
+	},
+	"由对象数组得到总和为100的数组": {
+		"prefix": "percent",
+		"body": [
+		  "$.bi.utils.per_arry_obj($1, $2, 'weight')"
+		],
+		"description": "由对象数组的 $2 字段得到总和为100的数组"
+	  },
+	"补充对象数组百分比得到总和为100的数组": {
+		"prefix": "percent",
+		"body": [
+		  "$.bi.utils.per_Num_Objarry($1, 100, '$2')"
+		],
+		"description": "补充对象数组百分比得到总和为100的数组"
+	},
+	"数组/对象数组去重": {
+		"prefix": "unique",
+		"body": [
+		  "$.bi.unique($1, '$2');"
+		],
+		"description": "数组/对象数组去重，$1 为数组/对象数组，$2 为对象的字段名（选填）"
+	},
+	"提示信息": {
+		"prefix": "msg",
+		"body": [
+			"$.bi.msg($1)"
+		],
+		"description": "提示信息"
+	},
+	"打开遮罩": {
+		"prefix": "load",
+		"body": [
+			"var index = $.bi.load();"
+		],
+		"description": "打开遮罩"
+	},
+	"关闭遮罩": {
+		"prefix": "close",
+		"body": [
+			"$.bi.close(index);"
+		],
+		"description": "关闭遮罩"
+	},
+	"发起请求": {
+		"prefix": "api",
+		"body": [
+		  "var params = {};",
+		  "var index = $.bi.load();",
+		  "api.$1(params).then(function (res) {",
+		  "    $.bi.close(index);",
+		  "    if (res.status == 200) {",
+		  "        try {",
+		  "            $2",
+		  "        } catch (e) {",
+		  "            console.error(e);",
+		  "            $.bi.msg(e.name + ':' + e.message);",
+		  "        }",
+		  "    } else {",
+		  "        console.log('调用 $1 接口出错');",
+		  "    }",
+		  "});"
+		],
+		"description": "发起请求"
+	},
+	"获取权限接口": {
+		"prefix": "get_rights",
+		"body": [
+			"var vm = this;",
+			"var params = {",
+			"    functionNos: '$1,',",
+			"};",
+			"api.haveRights(params).then(function (res) {",
+			"    if (res.status == 200 && res.data) {",
+			"        vm.rights = res.data;",
+			"    }",
+			"});"
+		],
+		"description": "获取权限接口，权限名用英文逗号分隔"
+	},
+	"获取字典接口": {
+		"prefix": "get_dict",
+		"body": [
+			"var vm = this;",
+			"var params = { paramTypes: '$1,' };",
+			"api.comControllerParams(params).then(function (res) {",
+			"    if (res.status == 200 && res.data) {",
+			"        vm.dict = res.data;",
+			"    }",
+			"});",
+			""
+		],
+		"description": "获取字典接口，字典名用英文逗号分隔"
+	},
+	"js文件骨架": {
+		"prefix": "js",
+		"body": [
+			"var app = new Vue({",
+			"    el: '#app',",
+			"    data: {},",
+			"    methods: {},",
+			"    created: function () {",
+			"        console.log('init');",
+			"    },",
+			"    mounted: function () {},",
+			"});",
+			""
+		],
+		"description": "js文件骨架"
+	},
+	"打开弹窗页面": {
+		"prefix": "page",
+		"body": [
+			"$.bi.openPage({",
+			"    title: '$1', // 弹窗标题",
+			"    area: ['80%', '80%'], // 窗口大小，也可以写成 ['200px', '400px']",
+			"    content: projectPath + '$2', // html 文件路径，如 /pages/xxx/xxx.html",
+			"    // btn: ['按钮一', '按钮二'],",
+			"    // yes: function (index, dom) {",
+			"    //     // 按钮一的回调",
+			"    // },",
+			"    // btn2: function (index, dom) {",
+			"    //     // 按钮二的回调",
+			"    //     // return false 开启该代码可禁止点击该按钮关闭",
+			"    // },",
+			"    // cancel: function () {",
+			"    //     // 右上角关闭的回调",
+			"    //     // return false 开启该代码可禁止点击该按钮关闭",
+			"    // },",
+			"    // end: function () {",
+			"    //     // 销毁后的回调",
+			"    // },",
+			"}, $3); // 参数，可以传递给弹窗页面",
+			""
+		],
+		"description": "打开弹窗页面"
+	},
+	"打开页内弹窗": {
+		"prefix": "page",
+		"body": [
+			"$.bi.openDailog({",
+			"    title: '$1', // 弹窗标题",
+			"    area: ['80%', '80%'], // 窗口大小，也可以写成 ['200px', '400px']",
+			"    content: $('#$2'), // 弹窗 id",
+			"    // btn: ['按钮一', '按钮二'],",
+			"    // yes: function (index, dom) {",
+			"    //     // 按钮一的回调",
+			"    // },",
+			"    // btn2: function (index, dom) {",
+			"    //     // 按钮二的回调",
+			"    //     // return false 开启该代码可禁止点击该按钮关闭",
+			"    // },",
+			"    // cancel: function () {",
+			"    //     // 右上角关闭的回调",
+			"    //     // return false 开启该代码可禁止点击该按钮关闭",
+			"    // },",
+			"    // end: function () {",
+			"    //     // 销毁后的回调",
+			"    // },",
+			"});",
+			""
+		],
+		"description": "打开页内弹窗"
+	},
+	"表格生成函数": {
+		"prefix": "grid",
+		"body": [
+			"renderTable: function (q) {",
+			"    var vm = this;",
+			"    var grid = $('#$1');",
+			"    var columns = [",
+			"        {",
+			"            title: '性别',",
+			"            field: 'gender',",
+			"            width: 120,",
+			"            align: 'center',",
+			"            // formatter: function (value, rows) {",
+			"            //     return $.bi.dictFilter(value, vm.dictionariesParam['GENDER'], 'paramCode', 'paramName');",
+			"            // },",
+			"        },",
+			"    ];",
+			"    columns.unshift({ field: 'ck', checkbox: true, width: 50 });",
+			"    grid.datagrid({",
+			"        queryParams: q,",
+			"        pagination: true,",
+			"        singleSelect: false,",
+			"        height: $.bi.getGridHeight(grid) - 60,",
+			"        method: 'post',",
+			"        loadMsg: '数据加载中...',",
+			"        fitColumns: false,",
+			"        pageSize: 10,",
+			"        pageList: [10, 20, 40, 60, 80, 100, 120],",
+			"        columns: [columns],",
+			"        loader: function (param, success, error) {",
+			"            success({ rows: [], total: 0 });",
+			"            // api.queryCustomerList(param).then(function (res) {",
+			"            //     if (res.status == 200 && res.data) {",
+			"            //         success(res.data);",
+			"            //     }",
+			"            // }, error);",
+			"        },",
+			"    });",
+			"}"
+		],
+		"description": "表格生成函数"
+	},
+	"导出为excel": {
+		"prefix": "excel",
+		"body": [
+			"/**",
+			" * @description: 表格导出为 excel",
+			" * @param {boolean} flag true 导出全部，false 导出选择",
+			" * @return {*}",
+			" */",
+			"toExcelData: function (flag) {",
+			"    var vm = this;",
+			"    if (flag) {",
+			"        vm.toExcel($1 || []); // 表格全部数据api",
+			"    } else {",
+			"        var rows = $('#$2').datagrid('getSelections');",
+			"        vm.toExcel(rows);",
+			"    }",
+			"},",
+			"/**",
+			" * @description: 将选择行导出为 excel",
+			" * @param {array} rows 选择行",
+			" * @return {*}",
+			" */",
+			"toExcel: function (rows) {",
+			"    var vm = this;",
+			"    var grid = $('#$3');",
+			"    var fileName = '$4'; // 导出文件名前缀",
+			"    if (!rows.length) {",
+			"        $.bi.msg('无数据导出');",
+			"        return;",
+			"    }",
+			"    var header = [];",
+			"    var fields = grid.datagrid('getColumnFields');",
+			"    header = fields.filter(function (item, index) {",
+			"        var option = grid.datagrid('getColumnOption', item);",
+			"        return option.field != 'ck' && option.hidden != true; // 过滤掉 ck 列和隐藏列",
+			"    });",
+			"    var title = {};",
+			"    var exceldata = [];",
+			"    $.each(header, function (index, el) {",
+			"        title[el] = grid.datagrid('getColumnOption', el).title;",
+			"    });",
+			"    for (var i = 0; i < rows.length; i++) {",
+			"        var row = {};",
+			"        for (var j = 0; j < header.length; j++) {",
+			"            // 个性化代码写在这里",
+			"            row[header[j]] = rows[i][header[j]];",
+			"        }",
+			"        exceldata.push(row);",
+			"    }",
+			"    exceldata = [title].concat(exceldata);",
+			"    $.bi.toExcel(fileName + util.formatDate(new Date(), 'yyyyMMddhhmmss'), exceldata, header);",
+			"},"
+		],
+		"description": "导出为excel"
+	},
+	"默认echarts图表配置": {
+		"prefix": "chart",
+		"body": [
+			"var chartColor = $.bi.getChartColor();",
+			"var chart_default_option = {",
+			"    animation: false,",
+			"    tooltip: {",
+			"        trigger: 'axis',",
+			"    },",
+			"    color: chartColor,",
+			"    legend: {",
+			"        itemHeight: 4,",
+			"        itemWidth: 10,",
+			"        itemGap: 10,",
+			"        x: 'center',",
+			"        y: 'bottom',",
+			"    },",
+			"    textStyle: {",
+			"        fontFamily: '宋体',",
+			"        color: '#666',",
+			"        fontSize: 12,",
+			"    },",
+			"    grid: {",
+			"        borderColor: 'rgba(0,0,0,0)',",
+			"        containLabel: true,",
+			"        top: '10%',",
+			"        left: '3%',",
+			"        right: '5%',",
+			"        bottom: '20%',",
+			"    },",
+			"    xAxis: {",
+			"        type: 'category',",
+			"        axisLabel: {",
+			"            color: '#999',",
+			"            fontSize: 12,",
+			"        },",
+			"        axisLine: {",
+			"            show: false,",
+			"        },",
+			"    },",
+			"    yAxis: {",
+			"        type: 'value',",
+			"        axisLabel: {",
+			"            color: '#999',",
+			"            fontSize: 12,",
+			"        },",
+			"        axisLine: {",
+			"            show: false,",
+			"        },",
+			"        axisTick: {",
+			"            show: false,",
+			"        },",
+			"        splitLine: {",
+			"            show: false,",
+			"        },",
+			"    },",
+			"};"
+		],
+		"description": "默认echarts图表配置"
+	}
+	
+	// ------------------- js end -------------------
+	// ------------------- BI END -------------------
+}
