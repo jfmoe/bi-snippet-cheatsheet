@@ -20,7 +20,7 @@
 		"scope": "javascript",
 		"prefix": "lx",
 		"body": [
-			"${1|boolean,object,array,string,number,function|}"
+			"${1|boolean,number,string,object,array|}"
 		],
 		"description": "类型选择，配合函数注释插件 koroFileHeader 使用"
 	},
@@ -306,7 +306,7 @@
 	"由对象数组得到总和为100的数组": {
 		"prefix": "percent",
 		"body": [
-		  "$.bi.utils.per_arry_obj($1, $2, 'weight')"
+		  "$.bi.utils.per_arry_obj($1, '$2', 'weight')"
 		],
 		"description": "由对象数组的 $2 字段得到总和为100的数组"
 	  },
@@ -531,8 +531,8 @@
 			" */",
 			"toExcel: function (rows) {",
 			"    var vm = this;",
-			"    var grid = $('#$3');",
-			"    var fileName = '$4'; // 导出文件名前缀",
+			"    var grid = $('#$2');",
+			"    var fileName = '$3'; // 导出文件名前缀",
 			"    if (!rows.length) {",
 			"        $.bi.msg('无数据导出');",
 			"        return;",
