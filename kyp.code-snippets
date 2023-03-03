@@ -1,0 +1,185 @@
+{
+  // v1.0
+  // 引入方法：在 VSCODE 中点击设置-用户代码片段-新建全局代码片段文件，将本页所有内容复制进去
+  // 使用方法：在页面中键入代码片段对应的 prefix，选择后用 tab 键依次切换占位符
+  // 语法介绍：https://juejin.cn/post/6844904052950564871
+  // 代码转换工具：https://snippet-generator.app/
+
+  // ------------------- GLOBAL BEGIN -------------------
+  "打印到控制台": {
+    "scope": "javascript,typescript",
+    "prefix": "log",
+    "body": ["console.log('$1',$2);", "$3"],
+    "description": "Log output to console"
+  },
+  "基本类型选择": {
+    "scope": "javascript",
+    "prefix": "lx",
+    "body": ["${1|Boolean,Number,String,Object,Array|}"],
+    "description": "类型选择"
+  },
+  // ------------------- GLOBAL END -------------------
+
+  // ------------------- BI BEGIN -------------------
+  // ------------------- html begin -------------------
+  "按钮": {
+    "prefix": "btn",
+    "body": [
+      "<h-button class=\"h-btn ${1|bi-btn-primary,h-btn-ghost|}\" @click=\"$2\">$3</h-button>"
+    ],
+    "description": "按钮"
+  },
+  "vue文件骨架": {
+    "prefix": "vue",
+    "body": [
+      "<template>",
+      "  <div></div>",
+      "</template>",
+      "",
+      "<script>",
+      "export default {",
+      "  name: '',",
+      "  components: {},",
+      "  props: {",
+      "    example: {",
+      "      type: Boolean,",
+      "      default: false",
+      "    }",
+      "  },",
+      "  data() {",
+      "    return {};",
+      "  },",
+      "  watch: {",
+      "    example: {",
+      "      handler(newVal, oldVal) {},",
+      "      deep: true,",
+      "      immediate: true",
+      "    }",
+      "  },",
+      "  computed: {},",
+      "  created() {",
+      "    console.log('init');",
+      "    this.init();",
+      "  },",
+      "  methods: {",
+      "    init() {}",
+      "  }",
+      "};",
+      "</script>",
+      "",
+      "<style lang=\"less\" scoped></style>",
+      ""
+    ],
+    "description": "vue文件骨架"
+  },
+  // ------------------- html end -------------------
+  // ------------------- js begin -------------------
+  "获取URL参数": {
+    "prefix": "url",
+    "body": ["util.getQueryString('$1')"],
+    "description": "获取URL参数"
+  },
+  "数字格式化": {
+    "prefix": "format",
+    "body": ["$bi.formatNumber($1, $2)"],
+    "description": "4个参数依次为数字，小数位，是否格式化为千分位，若为空返回的结果"
+  },
+  "日期格式化": {
+    "prefix": "format",
+    "body": ["$bi.formatDate($1, 'yyyy-MM-dd hh:mm:ss')"],
+    "description": "将 $1 格式化成第二个参数的形式"
+  },
+  "百分比格式化": {
+    "prefix": "format",
+    "body": ["$bi.formatReturnRate($1)"],
+    "description": "将 $1 * 100 并带上 % ，如果没有数据返回 --"
+  },
+  "判断是否为空": {
+    "prefix": "is_empty",
+    "body": ["$bi.isEmpty($1)"],
+    "description": "为空返回 true"
+  },
+  "获取字典中对应的名称": {
+    "prefix": "dict",
+    "body": ["$bi.dictFilter($1, $2, 'val', 'prompt')"],
+    "description": "根据 paramCode 获取对应的 paramName，$1 为 paramCode，$2 通常为接口返回的字典"
+  },
+  "获取系统参数": {
+    "prefix": "sys",
+    "body": ["$bi.getSP('$1','$2')"],
+    "description": "获取系统参数，$1 为模块名，$2 为参数名"
+  },
+  "合并对象": {
+    "prefix": "merge",
+    "body": ["this.$lodash.merge($1, $2)"],
+    "description": "将 $2 等多个对象合并到 $1 中"
+  },
+  "深拷贝对象": {
+    "prefix": "clone",
+    "body": ["this.$lodash.cloneDeep($1)"],
+    "description": "返回 $1 的深拷贝对象"
+  },
+  "加": {
+    "prefix": "add",
+    "body": ["$bi.plus($1, $2)"],
+    "description": "返回 ($1 + $2) 的结果，解决精度丢失问题"
+  },
+  "减": {
+    "prefix": "sub",
+    "body": ["$bi.minus($1, $2)"],
+    "description": "返回 ($1 - $2) 的结果，解决精度丢失问题"
+  },
+  "乘": {
+    "prefix": "mul",
+    "body": ["$bi.multipliedBy($1, $2)"],
+    "description": "返回 ($1 * $2) 的结果，解决精度丢失问题"
+  },
+  "除": {
+    "prefix": "div",
+    "body": ["$bi.dividedBy($1, $2)"],
+    "description": "返回 ($1 / $2) 的结果，解决精度丢失问题"
+  },
+  "由对象数组得到总和为100的数组": {
+    "prefix": "percent",
+    "body": ["$bi.per_arry_obj($1, '$2', 'weight')"],
+    "description": "由对象数组的 $2 字段得到总和为100的数组"
+  },
+  "补充对象数组百分比得到总和为100的数组": {
+    "prefix": "percent",
+    "body": ["$bi.per_Num_Objarry($1, 100, '$2')"],
+    "description": "补充对象数组百分比得到总和为100的数组"
+  },
+  "获取分类后的对象数组": {
+    "prefix": "classify",
+    "body": ["$bi.formatterData($1, '$2', '$3')"],
+    "description": "获取分类后的对象数组"
+  },
+  "数组/对象数组去重": {
+    "prefix": "unique",
+    "body": ["$bi.unique($1, '$2')"],
+    "description": "数组/对象数组去重，$1 为数组/对象数组，$2 为对象的字段名（选填）"
+  },
+  "提示信息": {
+    "prefix": "msg",
+    "body": ["$bi.msg($1)"],
+    "description": "提示信息"
+  },
+  "打开遮罩": {
+    "prefix": "load",
+    "body": ["this.$loading().load();"],
+    "description": "打开遮罩"
+  },
+  "关闭遮罩": {
+    "prefix": "close",
+    "body": ["this.$loading().close();"],
+    "description": "关闭遮罩"
+  },
+  "获取字典接口": {
+    "prefix": "get_dict",
+    "body": ["this.getDict([$1], data => { this.dict = data; });"],
+    "description": "获取字典接口，字典名用英文逗号分隔"
+  }
+
+  // ------------------- js end -------------------
+  // ------------------- BI END -------------------
+}
